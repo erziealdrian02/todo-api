@@ -1,0 +1,1248 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My Flight API",
+        "description": "This is a sample API",
+        "contact": {
+            "email": "developer@example.com"
+        },
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/flight": {
+            "get": {
+                "tags": [
+                    "Flight"
+                ],
+                "summary": "Get all flights",
+                "operationId": "525de79afb09872c49f83fdc363283e0",
+                "responses": {
+                    "200": {
+                        "description": "List of flights",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Flight"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Flight"
+                ],
+                "summary": "Create a new flight",
+                "operationId": "30b55bbcd079bc3a3ea9f931b4bd6e29",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "flight_number",
+                                    "airline",
+                                    "origin",
+                                    "destination",
+                                    "departure_time",
+                                    "arrival_time",
+                                    "price",
+                                    "seats_available"
+                                ],
+                                "properties": {
+                                    "flight_number": {
+                                        "description": "Flight number",
+                                        "type": "string",
+                                        "example": "GA123"
+                                    },
+                                    "airline": {
+                                        "description": "Airline name",
+                                        "type": "string",
+                                        "example": "Garuda Indonesia"
+                                    },
+                                    "origin": {
+                                        "description": "Origin city",
+                                        "type": "string",
+                                        "example": "Jakarta"
+                                    },
+                                    "destination": {
+                                        "description": "Destination city",
+                                        "type": "string",
+                                        "example": "Bali"
+                                    },
+                                    "departure_time": {
+                                        "description": "Departure time in ISO 8601 format",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2025-01-10 10:00:00"
+                                    },
+                                    "arrival_time": {
+                                        "description": "Arrival time in ISO 8601 format",
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2025-01-10 12:00:00"
+                                    },
+                                    "price": {
+                                        "description": "Price of the flight",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 150.5
+                                    },
+                                    "seats_available": {
+                                        "description": "Number of available seats",
+                                        "type": "integer",
+                                        "example": 100
+                                    },
+                                    "airline_id": {
+                                        "description": "Airline ID (optional, defaults to 0)",
+                                        "type": "integer",
+                                        "example": 0
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Flight created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data Post Berhasil Ditambahkan!"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "flight_number": {
+                                                    "type": "string",
+                                                    "example": "GA123"
+                                                },
+                                                "airline": {
+                                                    "type": "string",
+                                                    "example": "Garuda Indonesia"
+                                                },
+                                                "origin": {
+                                                    "type": "string",
+                                                    "example": "Jakarta"
+                                                },
+                                                "destination": {
+                                                    "type": "string",
+                                                    "example": "Bali"
+                                                },
+                                                "departure_time": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-10T10:00:00Z"
+                                                },
+                                                "arrival_time": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-10T12:00:00Z"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 150.5
+                                                },
+                                                "seats_available": {
+                                                    "type": "integer",
+                                                    "example": 100
+                                                },
+                                                "airline_id": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-09T08:00:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-09T08:00:00Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Terjadi kesalahan saat menyimpan data."
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error details here"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/flight/{id}": {
+            "get": {
+                "tags": [
+                    "Flight"
+                ],
+                "summary": "Get a flight by ID",
+                "operationId": "57119aea39c090692bddaa5750719aad",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the flight",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Flight details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Flight"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Flight not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Flight"
+                ],
+                "summary": "Update a flight by ID",
+                "operationId": "a833f41de637e61d5d94d5e76ad4e919",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the flight to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "flight_number": {
+                                        "type": "string",
+                                        "example": "GA123"
+                                    },
+                                    "airline": {
+                                        "type": "string",
+                                        "example": "Garuda Indonesia"
+                                    },
+                                    "origin": {
+                                        "type": "string",
+                                        "example": "Jakarta"
+                                    },
+                                    "destination": {
+                                        "type": "string",
+                                        "example": "Bali"
+                                    },
+                                    "departure_time": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2025-01-10T10:00:00Z"
+                                    },
+                                    "arrival_time": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2025-01-10T12:00:00Z"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 150.5
+                                    },
+                                    "seats_available": {
+                                        "type": "integer",
+                                        "example": 100
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Flight updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Flight updated successfully!"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "flight_number": {
+                                                    "type": "string",
+                                                    "example": "GA123"
+                                                },
+                                                "airline": {
+                                                    "type": "string",
+                                                    "example": "Garuda Indonesia"
+                                                },
+                                                "origin": {
+                                                    "type": "string",
+                                                    "example": "Jakarta"
+                                                },
+                                                "destination": {
+                                                    "type": "string",
+                                                    "example": "Bali"
+                                                },
+                                                "departure_time": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-10 10:00:00"
+                                                },
+                                                "arrival_time": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-10 12:00:00"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 150.5
+                                                },
+                                                "seats_available": {
+                                                    "type": "integer",
+                                                    "example": 100
+                                                },
+                                                "airline_id": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-09T08:00:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-09T08:00:00Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Flight not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Flight not found!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "An error occurred while updating the flight."
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error details here"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Flight"
+                ],
+                "summary": "Delete a flight by ID",
+                "operationId": "ed4bc5d7bf6dd8c15474814df49bb57a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the flight to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Flight deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data Flight Berhasil Di Delete!"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "flight_number": {
+                                                    "type": "string",
+                                                    "example": "GA123"
+                                                },
+                                                "airline": {
+                                                    "type": "string",
+                                                    "example": "Garuda Indonesia"
+                                                },
+                                                "origin": {
+                                                    "type": "string",
+                                                    "example": "Jakarta"
+                                                },
+                                                "destination": {
+                                                    "type": "string",
+                                                    "example": "Bali"
+                                                },
+                                                "departure_time": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-10T10:00:00Z"
+                                                },
+                                                "arrival_time": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-10T12:00:00Z"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 150.5
+                                                },
+                                                "seats_available": {
+                                                    "type": "integer",
+                                                    "example": 100
+                                                },
+                                                "airline_id": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-09T08:00:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-09T08:00:00Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Flight not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Flight not found!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Terjadi kesalahan saat mendelete data."
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error details here"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/flight/{startDate}/{endDate}": {
+            "get": {
+                "tags": [
+                    "Flight"
+                ],
+                "summary": "Get a flight by Start and End Date",
+                "operationId": "4df45be5ee79e84a3e586ad9bcb80633",
+                "parameters": [
+                    {
+                        "name": "startDate",
+                        "in": "path",
+                        "description": "Start Date of the flight (format: YYYY-MM-DD)",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "endDate",
+                        "in": "path",
+                        "description": "End Date of the flight (format: YYYY-MM-DD)",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Flight details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Flight"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Flight not found"
+                    }
+                }
+            }
+        },
+        "/api/flight/{startDate}/{endDate}/{destination}": {
+            "get": {
+                "tags": [
+                    "Flight"
+                ],
+                "summary": "Get a flight by Start and End Date",
+                "operationId": "990ee0d397175ec1aae58282b7a5fed5",
+                "parameters": [
+                    {
+                        "name": "startDate",
+                        "in": "path",
+                        "description": "Start Date of the flight (format: YYYY-MM-DD)",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "endDate",
+                        "in": "path",
+                        "description": "End Date of the flight (format: YYYY-MM-DD)",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "destination",
+                        "in": "path",
+                        "description": "Destination",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Flight details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Flight"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Flight not found"
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register a new user",
+                "description": "Create a new user account and return a token.",
+                "operationId": "8a56853624e025573120a09a4c75d468",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "User's full name",
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "description": "User's email address",
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "johndoe@example.com"
+                                    },
+                                    "password": {
+                                        "description": "User's password",
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User registered successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User berhasil didaftarkan!"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "user": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "John Doe"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "johndoe@example.com"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2025-01-09T08:00:00Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2025-01-09T08:00:00Z"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "token": {
+                                                    "type": "string",
+                                                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Terjadi kesalahan saat menyimpan data."
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error details here"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login a user",
+                "description": "Authenticate a user and return a token.",
+                "operationId": "a3b306d14572d1f4bd6c064b3233e7b8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "User's email address",
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "johndoe@example.com"
+                                    },
+                                    "password": {
+                                        "description": "User's password",
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "John Doe"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "johndoe@example.com"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The provided credentials are incorrect."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "An error occurred during login."
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error details here"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout a user",
+                "description": "Revoke the user's current token.",
+                "operationId": "fe8f3429cd6979b3b4517e186505f9f9",
+                "responses": {
+                    "200": {
+                        "description": "Logout successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Logged out successfully."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "An error occurred during logout."
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error details here"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Flight": {
+                "title": "Flight",
+                "description": "Schema for Flight model",
+                "required": [
+                    "flight_number",
+                    "airline",
+                    "origin",
+                    "destination",
+                    "departure_time",
+                    "arrival_time",
+                    "price",
+                    "seats_available"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID of the flight",
+                        "type": "integer"
+                    },
+                    "flight_number": {
+                        "description": "Flight number",
+                        "type": "string"
+                    },
+                    "airline": {
+                        "description": "Airline name",
+                        "type": "string"
+                    },
+                    "origin": {
+                        "description": "Origin city",
+                        "type": "string"
+                    },
+                    "destination": {
+                        "description": "Destination city",
+                        "type": "string"
+                    },
+                    "departure_time": {
+                        "description": "Departure time",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "arrival_time": {
+                        "description": "Arrival time",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "price": {
+                        "description": "Ticket price",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "seats_available": {
+                        "description": "Available seats",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Update timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "Schema for User model",
+                "required": [
+                    "name",
+                    "email"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID of the user",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "User's full name",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "User's email address",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Update timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterResponse": {
+                "title": "Register Response",
+                "description": "Response schema for user registration",
+                "properties": {
+                    "success": {
+                        "description": "Indicates if the operation was successful",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "message": {
+                        "description": "Response message",
+                        "type": "string",
+                        "example": "User berhasil didaftarkan!"
+                    },
+                    "data": {
+                        "properties": {
+                            "user": {
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "token": {
+                                "description": "Authentication token",
+                                "type": "string",
+                                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "LoginResponse": {
+                "title": "Login Response",
+                "description": "Response schema for user login",
+                "properties": {
+                    "success": {
+                        "description": "Indicates if the operation was successful",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "token": {
+                        "description": "Authentication token",
+                        "type": "string",
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    }
+                },
+                "type": "object"
+            },
+            "LogoutResponse": {
+                "title": "Logout Response",
+                "description": "Response schema for user logout",
+                "properties": {
+                    "success": {
+                        "description": "Indicates if the operation was successful",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "message": {
+                        "description": "Response message",
+                        "type": "string",
+                        "example": "Logged out successfully."
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Enter 'Bearer <token>' to authenticate.",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Flight",
+            "description": "Flight"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
+        }
+    ]
+}
