@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
-class Passenger extends Model
+class Todo extends Model
 {
     use HasFactory;
     
@@ -16,9 +15,10 @@ class Passenger extends Model
     * @var array
      */
     protected $fillable = [
-        'booking_id',
-        'name',
-        'gender',
-        'seat_number',
+        'user_id',
+        'title',
+        'description',
+        'status',
+        'due_date',
     ];
 }

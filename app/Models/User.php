@@ -48,7 +48,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function flights(){
-        return $this->hasMany(Flight::class);
+    public function todos(){
+        return $this->hasMany(Todo::class);
     }
 }
