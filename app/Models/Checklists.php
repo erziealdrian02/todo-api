@@ -5,20 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Todo extends Model
+class Checklists extends Model
 {
     use HasFactory;
-    
-    /**
-     * fillable
-     *
-    * @var array
-     */
+
     protected $fillable = [
         'user_id',
-        'title',
-        'description',
-        'status',
-        'due_date',
+        'name',
     ];
 }

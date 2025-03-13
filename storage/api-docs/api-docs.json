@@ -9,6 +9,562 @@
         "version": "0.1"
     },
     "paths": {
+        "/api/checklist": {
+            "get": {
+                "tags": [
+                    "Checklist"
+                ],
+                "summary": "Get all checklists",
+                "operationId": "ba44fc47c06e7adca69f3309915254e2",
+                "responses": {
+                    "200": {
+                        "description": "List of checklists",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Checklist"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Checklist"
+                ],
+                "summary": "Create a new checklist",
+                "operationId": "9dd662a7a673f10d4177faec0f7deba8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Checklist name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Checklist created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Checklist"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/checklist/{id}": {
+            "get": {
+                "tags": [
+                    "Checklist"
+                ],
+                "summary": "Get a checklist by ID",
+                "operationId": "d86676c55fb232785f4f3ccc052ca845",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Checklist ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Checklist found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Checklist"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Checklist not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Checklist"
+                ],
+                "summary": "Update a checklist",
+                "operationId": "54075345948d0051908470875de1cdc3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Checklist ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Updated checklist name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Checklist updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Checklist"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Checklist not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Checklist"
+                ],
+                "summary": "Delete a checklist",
+                "operationId": "7d4ad43f6dc452f63f8e61d8d5c1910b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Checklist ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Checklist deleted"
+                    },
+                    "404": {
+                        "description": "Checklist not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/checklist/{checklist_id}/item": {
+            "get": {
+                "tags": [
+                    "Checklist Item"
+                ],
+                "summary": "Get all items in a checklist",
+                "operationId": "02c9c9f0090e84c0c074ffae104f192f",
+                "parameters": [
+                    {
+                        "name": "checklist_id",
+                        "in": "path",
+                        "description": "Checklist ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of checklist items",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ChecklistItem"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Checklist not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Checklist Item"
+                ],
+                "summary": "Create a new checklist item",
+                "operationId": "b299e3995c5bd4a0c4ae122a5f26ae83",
+                "parameters": [
+                    {
+                        "name": "checklist_id",
+                        "in": "path",
+                        "description": "Checklist ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "item_name"
+                                ],
+                                "properties": {
+                                    "item_name": {
+                                        "description": "Checklist item name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Checklist item created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChecklistItem"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Checklist not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/checklist/{checklist_id}/item/{item_id}": {
+            "get": {
+                "tags": [
+                    "Checklist Item"
+                ],
+                "summary": "Get a specific checklist item",
+                "operationId": "e155308f540bf1a3f910187dcbe3db46",
+                "parameters": [
+                    {
+                        "name": "checklist_id",
+                        "in": "path",
+                        "description": "Checklist ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "item_id",
+                        "in": "path",
+                        "description": "Checklist Item ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Checklist item found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChecklistItem"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Checklist item not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Checklist Item"
+                ],
+                "summary": "Update checklist item status",
+                "operationId": "8d295d66d12a09a18c44c3e861a6233c",
+                "parameters": [
+                    {
+                        "name": "checklist_id",
+                        "in": "path",
+                        "description": "Checklist ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "item_id",
+                        "in": "path",
+                        "description": "Checklist Item ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "is_completed": {
+                                        "description": "Completion status of the checklist item",
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Checklist item updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChecklistItem"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Checklist item not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Checklist Item"
+                ],
+                "summary": "Delete a checklist item",
+                "operationId": "043789ab9417c9f51a1d044b469c57be",
+                "parameters": [
+                    {
+                        "name": "checklist_id",
+                        "in": "path",
+                        "description": "Checklist ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "item_id",
+                        "in": "path",
+                        "description": "Checklist Item ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Checklist item deleted"
+                    },
+                    "404": {
+                        "description": "Checklist item not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/checklist/{checklist_id}/item/rename/{item_id}": {
+            "put": {
+                "tags": [
+                    "Checklist Item"
+                ],
+                "summary": "Rename checklist item",
+                "operationId": "5db06430ee2788b945bf0d588a03ed1b",
+                "parameters": [
+                    {
+                        "name": "checklist_id",
+                        "in": "path",
+                        "description": "Checklist ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "item_id",
+                        "in": "path",
+                        "description": "Checklist Item ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "item_name": {
+                                        "description": "New name for the checklist item",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Checklist item renamed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChecklistItem"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Checklist item not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/todo": {
             "get": {
                 "tags": [
@@ -773,6 +1329,76 @@
     },
     "components": {
         "schemas": {
+            "Checklist": {
+                "title": "Checklist",
+                "description": "Schema for Checklist model",
+                "required": [
+                    "user_id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID of the checklist",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "description": "ID of the user who owns the checklist",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Name of the checklist",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Update timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "ChecklistItem": {
+                "title": "Checklist Item",
+                "description": "Schema for Checklist Item model",
+                "required": [
+                    "checklist_id",
+                    "item_name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID of the checklist item",
+                        "type": "integer"
+                    },
+                    "checklist_id": {
+                        "description": "ID of the associated checklist",
+                        "type": "integer"
+                    },
+                    "item_name": {
+                        "description": "Name of the checklist item",
+                        "type": "string"
+                    },
+                    "is_completed": {
+                        "description": "Completion status of the checklist item",
+                        "type": "boolean"
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Update timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
             "Todo": {
                 "title": "Todo",
                 "description": "Schema for Todo model",
@@ -933,6 +1559,14 @@
         }
     },
     "tags": [
+        {
+            "name": "Checklist",
+            "description": "Checklist"
+        },
+        {
+            "name": "Checklist Item",
+            "description": "Checklist Item"
+        },
         {
             "name": "Todo",
             "description": "Todo"
