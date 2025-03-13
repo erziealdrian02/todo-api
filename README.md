@@ -46,7 +46,7 @@ Todo API adalah sebuah aplikasi backend yang dibangun menggunakan [Laravel](http
    ```bash
    php artisan migrate
    ```
-   **Atau jika tidak ingin melakukan migrasi, download file SQL berikut dan import ke database Anda:** [Download SQL](#)
+   **Atau jika tidak ingin melakukan migrasi, download file SQL berikut dan import ke database Anda:** [Download SQL](https://github.com/erziealdrian02/todo-api/blob/main/todosapp.sql)
 
 7. **Jalankan server pengembangan**:
    ```bash
