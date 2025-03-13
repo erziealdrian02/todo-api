@@ -32,8 +32,3 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/checklist/{checklist_id}/item/{item_id}', [CheclistItemsController::class, 'destroy']);
 });
 
-Route::get('/todo', [TodoController::class, 'index']);
-Route::get('/todo/{id}', [TodoController::class, 'show']);
-Route::post('/todo', [TodoController::class, 'store']);
-Route::put('/todo/{id}', [TodoController::class, 'update']);
-Route::delete('/todo/{id}', [TodoController::class, 'destroy']);
